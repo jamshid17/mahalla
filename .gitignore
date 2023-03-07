@@ -4,7 +4,7 @@ nazorat_data.csv
 tuman_data.csv
 migrations/
 .DS_Store
-
+cyrilic-latin.ipynb
 ### Django ###
 *.log
 *.pot
