@@ -1,0 +1,77 @@
+{% extends "nazorat/base.html" %}
+{% load crispy_forms_tags %}
+{% block content %}
+<form method="POST">
+    {% csrf_token %}
+    <fieldset class="form-group">
+        <legend class="border-bottom mb-4">Taqvimli statistikani hisoblash</legend>
+        {{ form|crispy }}
+    </fieldset>
+    <div class="form-group">
+        <button class="btn btn-outline-info" type="submit">Hisoblash</button>
+    </div>
+</form>
+{% if stats %}
+    <table class="table table-bordered container">
+        <thead>
+            <tr>
+                <th scope="col">So'rovnomalar soni</th>
+                <th scope="col">Rais tomonidan junatilganlar</th>
+                <th scope="col">Hokim yordamchisi tomonidan junatilganlar</th>
+                <th scope="col">Hokimiyatga junatilganlar</th>
+                <th scope="col">Kadastrga junatilganlar</th>
+                <th scope="col">Qurilishga junatilganlarr</th>
+                <th scope="col">Tasdiqlanganlar</th>
+                <th scope="col">Tasdiqlanmaganlar</th>
+
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>
+                    <a href="{% url 'periodic-requests' %}?start_date={{ form.start_range.value }}&end_date={{ form.end_range.value }}&page=1">
+                        {{ stats.count }}
+                    </a>
+                </td>
+                <td>
+                    <a href="{% url 'periodic-requests' %}?rais=true&start_date={{ form.start_range.value }}&end_date={{ form.end_range.value }}&page=1">
+                        {{ stats.sent_by_rais }}
+                    </a>
+                </td>
+                <td>
+                    <a href="{% url 'periodic-requests' %}?hokim_yordamchisi=true&start_date={{ form.start_range.value }}&end_date={{ form.end_range.value }}&page=1">
+                        {{ stats.sent_by_hokim_yordamchisi }}
+                    </a>
+                </td> 
+                <td>
+                    <a href="{% url 'periodic-requests' %}?hokimga=true&start_date={{ form.start_range.value }}&end_date={{ form.end_range.value }}&page=1">
+                        {{ stats.sent_to_hokimiyat }}
+                    </a>
+                </td>
+                <td>
+                    <a href="{% url 'periodic-requests' %}?qurilishga=true&start_date={{ form.start_range.value }}&end_date={{ form.end_range.value }}&page=1">
+                        {{ stats.sent_to_kadastr }}
+                    </a>
+                </td>
+                <td>
+                    <a href="{% url 'periodic-requests' %}?kadastrga=true&start_date={{ form.start_range.value }}&end_date={{ form.end_range.value }}&page=1">
+                        {{ stats.sent_to_qurilish }}
+                    </a>
+                </td>
+                <td>
+                    <a href="{% url 'periodic-requests' %}?tasdiqlangan=true&start_date={{ form.start_range.value }}&end_date={{ form.end_range.value }}&page=1">
+                        {{ stats.requests_certified }}
+                    </a>
+                </td>
+                <td>
+                    <a href="{% url 'periodic-requests' %}?tasdiqlanmagan=true&start_date={{ form.start_range.value }}&end_date={{ form.end_range.value }}&page=1">
+                        {{ stats.requests_not_certified }}
+                    </a>
+                </td>
+
+            </tr>
+        </tbody>
+    </table>
+{% endif %}
+
+{% endblock content %}

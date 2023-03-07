@@ -1,0 +1,40 @@
+{% extends "nazorat/main.html" %}
+{% block content %}
+<div class="card" style="width: 40rem;">
+    <img src="{{ object.image.url }}" class="card-img-top" >
+    <div class="card-body">
+        <h5 class="card-title">So'rovnoma mazmuni</h5>
+        <p class="card-text">{{ object.context }}</p>
+        <h5 class="card-title">Manzil</h5>
+        <p class="card-text">{{ object.address }}</p>
+        <h5 class="card-title">Yuborildi</h5>
+        {% if object.hokimiyat_receiver %}
+            <p class="card-text">{{ object.hokimiyat_receiver }}</p>
+        {% endif %}
+        {% if object.kadastr_receiver %}
+            <p class="card-text">{{ object.kadastr_receiver }}</p>
+        {% endif %}
+        {% if object.qurilish_receiver %}
+            <p class="card-text">{{ object.qurilish_receiver }}</p>
+        {% endif %}
+        
+        <h5 class="card-title">Javoblar</h5>
+        <p>Hokimdan: {% if response_from_hokim %}
+            <a class="response-link" href="{{ response_from_hokim.buyruq.url }}">Buyruq</a> 
+            {% if response_from_hokim.extra_file %} <a href="{{ response_from_hokim.extra_file.url }}" class="response-link">Qo'shimcha fayllar</a>
+            {% endif %}{% else %} Yo'q {% endif %}
+        </p>
+        <p>Qurilishdan: {% if response_from_qurilish %} 
+            <a class="response-link" href="{{ response_from_qurilish.buyruq.url }}">Buyruq</a> 
+            {% if response_from_qurilish.extra_file %} <a href="{{ response_from_qurilish.extra_file.url }}" class="response-link">Qo'shimcha fayllar</a>
+            {% endif %}{% else %} Yo'q {% endif %}
+        </p>
+        <p>Kadastrdan: {% if response_from_kadastr %} 
+            <a class="response-link" href="{{ response_from_kadastr.buyruq.url }}">Buyruq</a> 
+            {% if response_from_kadastr.extra_file %} <a href="{{ response_from_kadastr.extra_file.url }}" class="response-link">Qo'shimcha fayllar</a>
+            {% endif %}{% else %} Yo'q {% endif %}
+        </p>
+        <p>Tasdiqlanganmi: {% if is_certified %} Ha {% else %} Yo'q {% endif %}</p>
+    </div>
+</div>
+{% endblock content %}

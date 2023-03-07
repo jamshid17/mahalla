@@ -1,0 +1,22 @@
+{% extends "nazorat/base.html" %}
+{% load crispy_forms_tags %}
+{% block content %}
+    <div class="content-login">
+        <form method="POST" action="{% url 'login' %}" id="login-page">
+            {% csrf_token %}
+            <fieldset class="form-group">
+                <legend class="border-bottom mb-4">Tizimga kirish</legend>
+                {{ form|crispy }}
+                <label><b>Username</b></label>
+                <input class="form-control" type="text" name="username" required placeholder="username"><br>
+                <label><b>Parol</b></label>
+                <input id="password-input" class="form-control" type="password" name="password" placeholder="password" required >
+            </fieldset>
+            <div class="form-group">
+                <button class="btn btn-outline-info" type="submit">Kirish</button>
+            </div>
+        </form>
+    </div>
+{% endblock content %}
+
+

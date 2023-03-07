@@ -1,0 +1,44 @@
+{% extends "main/base.html" %}
+{% load hosts %}
+{% block content %}
+<a href="{% host_url 'request-create' host host_name %}"class="btn btn-outline-primary btn-lg" id="create-request">Yangi so'rovnoma yaratish</a>
+<div class="list-group">
+  <h2>{{ page_name }}</h2>
+    {% for request_obj in request_objects %}
+      <a href="{% url 'request-info' pk=request_obj.pk %}" class="list-group-item list-group-item-action flex-column align-items-start">
+        <div class="d-flex w-100 justify-content-between">
+          <h5 class="mb-1">So'rovnoma N{{ request_obj.pk }}</h5>
+          <small>{{ request_obj.created_at }}</small>
+        </div>
+        <p class="mb-1">{{ request.context }}</p>
+        <small>Kelgan javoblar: {{ request_obj.responses.count }}</small>
+      </a>
+    {% endfor %}
+</div>
+<div class="paginator"> 
+  <a class="btn btn-outline-info mb-4" href="?page=1">Birinchisi</a>
+  {% if request_objects.has_previous %}
+    <a class="btn btn-outline-info mb-4" href="?page={{ request_objects.previous_page_number }}">Oldingi</a>
+  {% else %}
+    <a class="btn btn-outline-info mb-4" href="?page=1">Oldingi</a>
+  {% endif %}
+  
+
+  {% for num in request_objects.paginator.page_range %}
+    {% if request_objects.number == num %}
+      <a class="btn btn-info mb-4" href="?page={{ num }}">{{ num }}</a>
+    {% elif num > request_objects.number|add:'-3' and num < request_objects.number|add:'3' %}
+      <a class="btn btn-outline-info mb-4" href="?page={{ num }}">{{ num }}</a>
+    {% endif %}
+  {% endfor %}
+
+  {% if request_objects.has_next %}
+    <a class="btn btn-outline-info mb-4" href="?page={{ request_objects.next_page_number }}">Keyingisi</a>
+  {% else %}
+    <a class="btn btn-outline-info mb-4" href="?page={{ request_objects.paginator.num_pages }}">Keyingisi</a>
+  {% endif %}
+  <a class="btn btn-outline-info mb-4" href="?page={{ request_objects.paginator.num_pages }}">Oxirgisi</a>
+
+</div>
+
+{% endblock content %}

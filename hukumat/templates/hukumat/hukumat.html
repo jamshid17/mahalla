@@ -1,0 +1,36 @@
+{% extends "main/base.html" %}
+{% load hosts  %}
+{% block content  %}
+
+
+<div class="row">
+    <div class="col-sm-4">
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title">Barcha so'rovnomalar</h5>
+          <p class="card-text">Barcha so'rovnomalar joylashgan sahifaga o'tish</p>
+          <a href="{% host_url 'all-request-list' host host_name %}?page=1" class="btn btn-primary">Sahifaga o'tish</a>
+        </div>
+      </div>
+    </div>
+    <div class="col-sm-4">
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title">Ko'rib chiqilgan so'rovnomalar</h5>
+          <p class="card-text">Ko'rib chiqilgan so'rovnomalar joylashgan sahifaga o'tish</p>
+          <a href="{% host_url 'finished-request-list' host host_name %}?page=1" class="btn btn-primary">Sahifaga o'tish</a>
+        </div>
+      </div>
+    </div>
+    <div class="col-sm-4">
+        <div class="card">
+          <div class="card-body">
+            <h5 class="card-title">Ko'rib chiqilmagan</h5>
+            <p class="card-text">Ko'rib chiqilmagan so'rovnomalar joylashgan sahifaga o'tish</p>
+            <a href="{% host_url 'not-finished-request-list' host host_name %}?page=1" class="btn btn-primary">Sahifaga o'tish</a>
+          </div>
+        </div>
+      </div>
+  </div>
+
+{% endblock content %}

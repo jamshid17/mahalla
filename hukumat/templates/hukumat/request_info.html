@@ -1,0 +1,33 @@
+{% extends "main/main.html" %}
+{% load crispy_forms_tags %}
+{% block content %}
+<div class="card" style="width: 40rem; margin-bottom: 2rem;">
+    <img src="{{ object.image.url}}" class="card-img-top" >
+    <div class="card-body">
+        <h5 class="card-title">So'rovnoma yuboruchi</h5>
+        <!-- <p class="card-text">Ism familiya: {{ object.sender.first_name }} {{ object.sender.last_name }}</p> -->
+        <p class="card-text">Kasbi: {{ object.sender.role }}</p>
+        <p class="card-text">Manzil: {{ object.sender.mahalla.name }}, {{ object.sender.mahalla.tuman.name  }} </p>
+        <h5 class="card-title">So'rovnoma mazmuni</h5>
+        <p class="card-text">{{ object.context }}</p>
+        <h5 class="card-title">Manzil</h5>
+        <p class="card-text">{{ object.address }}</p>
+        {% if user_response %}
+            <h5 class="card-title">Yuborilgan javob</h5>
+            <h6 class="card-text">Buyruq: <a href="{{ user_response.buyruq.url }}">yuklab olish</a></h6>
+            <h6 class="card-text">Qo'shimcha hujjat: {% if user_response.extra_file %} <a href="{{ user_response.extra_file.url }}">yuklab olish</a> {% else %} Yo'q {% endif %} </h6>
+            <h6 class="card-text">Tasdiqlanganmi: {% if user_response.is_certified %} Ha {% else %} Yo'q {% endif %}</h6>
+            <h6 class="card-text">Yuborilgan vaqt: {{ user_response.created_at }}</h6>
+        {% else %}
+            <form method="POST" enctype="multipart/form-data">
+                {% csrf_token %}
+                <h5 class="card-title">Javob yuborish</h5>
+                {{form|crispy}}
+                <div class="form-group">
+                    <button class="btn btn-outline-info" type="submit">Yuborish</button>
+                </div>
+            </form>
+        {% endif %}
+    </div>
+</div>
+{% endblock content %}
