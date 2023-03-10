@@ -23,4 +23,4 @@ def days_left_calculator(request_obj, request):
         difference_days = 5 - (dt_now - request_obj.created_at).days      
         if difference_days > 0:
             return f"{difference_days}  kun qolgan"
-        return "Kech bo'lgan"            
+        return "Muddati buzilgan"            

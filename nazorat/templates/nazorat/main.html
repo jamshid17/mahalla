@@ -20,7 +20,7 @@
     <div class="p-2">
         <div class="card" style="width: 15rem; height: 14rem;">
             <div class="card-body d-flex flex-column justify-content-center">
-                <h5 class="card-title text-center">Ko'rib chiqilganlik foizi</h5>
+                <h5 class="card-title text-center">Ko'rib chiqish foizi</h5>
                 <p class="card-text text-center big-statistic-number">{{ finished_percentage }}%</p>
             </div>
         </div>
@@ -28,7 +28,7 @@
     <div class="p-2">
         <div class="card" style="width: 16rem; height: 14rem;">
             <div class="card-body d-flex flex-column justify-content-center">
-                <h5 class="card-title text-center">Kech javob berilganlar</h5>
+                <h5 class="card-title text-center">Muddati buzilib javob berilganlar</h5>
                 <p class="card-text text-center big-statistic-number"><a href="{% url 'late-answered-requests' %}?page=1">{{ late_responses_count }}</a></p>
             </div>
         </div>
@@ -44,9 +44,9 @@
                         <div class="row-md-4 statistic-text">Indinga: <a href="{% url 'days-left-requests' %}?days=2&page=1">{{ two_day_left_requests }}</a></div>
                     </div>
                     <div class="col">
-                        <div class="row-md-4 statistic-text">3-kunda: <a href="{% url 'days-left-requests' %}?days=3&page=1">{{ three_day_left_requests }}</a></div>
-                        <div class="row-md-4 statistic-text">4-kunda: <a href="{% url 'days-left-requests' %}?days=4&page=1">{{ four_day_left_requests }}</a></div>
-                        <div class="row-md-4 statistic-text">5-kunda: <a href="{% url 'days-left-requests' %}?days=5&page=1">{{ five_day_left_requests }}</a></div>
+                        <div class="row-md-4 statistic-text">3 kun: <a href="{% url 'days-left-requests' %}?days=3&page=1">{{ three_day_left_requests }}</a></div>
+                        <div class="row-md-4 statistic-text">4 kun: <a href="{% url 'days-left-requests' %}?days=4&page=1">{{ four_day_left_requests }}</a></div>
+                        <div class="row-md-4 statistic-text">5 kun: <a href="{% url 'days-left-requests' %}?days=5&page=1">{{ five_day_left_requests }}</a></div>
                     </div>
                 </div>
             </div>
@@ -61,14 +61,14 @@
             <th scope="col">Jami</th>
             <th scope="col">Ko'rib chiqilgan</th>
             <th scope="col">Korib chiqish foizi</th>
-            <th scope="col">Kech javoblar</th>
+            <th scope="col">Muddati buzilgan javoblar</th>
             <th scope="col">Ko'rib chiqilmaganlar</th>
             <th scope="col">Bugun</th>
-            <th scope="col">1-kunda</th>
-            <th scope="col">2-kunda</th>
-            <th scope="col">3-kunda</th>
-            <th scope="col">4-kunda</th>
-            <th scope="col">5-kunda</th>
+            <th scope="col">1 kun</th>
+            <th scope="col">2 kun</th>
+            <th scope="col">3 kun</th>
+            <th scope="col">4 kun</th>
+            <th scope="col">5 kun</th>
         </tr>
     </thead>
     <tbody>

@@ -131,3 +131,6 @@ body {
   .date-ranger{
     width: 30%;
   }
+  .late-res-text{
+    color: red;
+  }

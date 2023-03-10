@@ -162,7 +162,7 @@ def late_answered_requests(request):
     request_objs = request_objs.order_by('-created_at')
     paginator = Paginator(request_objs, paginator_number)
     request_objects = paginator.get_page(query_page_num)  
-    context['page_name'] = "Kech javob berilgan so'rovnomalar"
+    context['page_name'] = "Muddati buzilib javob berilgan so'rovnomalar"
     context['request_objects'] = request_objects
     return render(request, template_name='nazorat/request_list.html', context=context)    
 
@@ -323,8 +323,8 @@ def period_requests(request):
     query_rais = request.GET.get('rais', False)
     query_hokim_helper = request.GET.get('hokim_yordamchisi', False)
     query_hokim = request.GET.get('hokimga', False)
-    query_qurilish = request.GET.get('qurilishga', False)
-    query_kadastr = request.GET.get('kadastrga', False)
+    query_qurilish = request.GET.get("Qurilish bo'limiga", False)
+    query_kadastr = request.GET.get(' Kadastr agentligiga', False)
     query_certified = request.GET.get('tasdiqlangan', False)
     query_not_certified = request.GET.get('tasdiqlanmagan', False)
     query_start_date = request.GET.get('start_date', '2023-01-01')

@@ -29,6 +29,7 @@ class ResponseForm(forms.ModelForm):
             # )
         }
         labels = {
-            "extra_file": "Qo'shimcha hujjat",
+            "buyruq":"Ko'rib chiqish natijasini yuklash",
+            "extra_file": "Qo'shimcha hujjatni yuklash",
             "is_certified" : "Tasdiqlangan*"
         }

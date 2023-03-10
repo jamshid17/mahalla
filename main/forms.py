@@ -37,11 +37,11 @@ class RequestForm(forms.Form):
         required=False
     )
     send_qurilish = forms.BooleanField(
-        label="Qurilishga yuborish",
+        label="Qurilish bo'limiga yuborish",
         required=False
     ) 
     send_kadastr = forms.BooleanField(
-        label="Kadastrga yuborish",
+        label="Kadastr agentligiga yuborish",
         required=False
 
     )

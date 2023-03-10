@@ -12,29 +12,29 @@
             <p class="card-text">Hokimiyatga</p>
         {% endif %}
         {% if object.kadastr_receiver %}
-            <p class="card-text">Kadastrga</p>
+            <p class="card-text"> Kadastr agentligiga</p>
         {% endif %}
         {% if object.qurilish_receiver %}
-            <p class="card-text">Qurilishga</p>
+            <p class="card-text"> Qurilish bo'limiga</p>
         {% endif %}
         
         <h5 class="card-title">Javoblar</h5>
         <p>Hokimdan: {% if response_from_hokim %} 
-            <a href="{{ response_from_hokim.buyruq.url }}">Asosiy buyruq</a> 
+            <a href="{{ response_from_hokim.buyruq.url }}">Ko'rib chiqish natijasi</a> 
             {% if response_from_hokim.extra_file %}
             <a class="extra-file" href="{{ response_from_hokim.extra_file.url }}">| Qo'shimcha fayl</a>
             {% endif %}
             {% else %} Yo'q {% endif %}
         </p>
         <p>Qurilishdan: {% if response_from_qurilish %} 
-            <a href="{{ response_from_qurilish.buyruq.url }}">Asosiy buyruq</a>
+            <a href="{{ response_from_qurilish.buyruq.url }}">Ko'rib chiqish natijasi</a>
             {% if response_from_qurilish.extra_file %}
             <a class="extra-file" href="{{ response_from_qurilish.extra_file.url }}">| Qo'shimcha fayl</a>
             {% endif %}
             {% else %} Yo'q {% endif %}
         </p>
         <p>Kadastrdan: {% if response_from_kadastr %} 
-            <a href="{{ response_from_kadastr.buyruq.url }}">Asosiy buyruq</a> 
+            <a href="{{ response_from_kadastr.buyruq.url }}">Ko'rib chiqish natijasi</a> 
             {% if response_from_kadastr.extra_file %}
             <a class="extra-file" href="{{ response_from_kadastr.extra_file.url }}">| Qo'shimcha fayl</a>
             {% endif %}

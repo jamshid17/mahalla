@@ -16,13 +16,13 @@
         <thead>
             <tr>
                 <th scope="col">So'rovnomalar soni</th>
-                <th scope="col">Rais tomonidan junatilganlar</th>
-                <th scope="col">Hokim yordamchisi tomonidan junatilganlar</th>
-                <th scope="col">Hokimiyatga junatilganlar</th>
-                <th scope="col">Kadastrga junatilganlar</th>
-                <th scope="col">Qurilishga junatilganlarr</th>
-                <th scope="col">Tasdiqlanganlar</th>
-                <th scope="col">Tasdiqlanmaganlar</th>
+                <th scope="col">MFY raisi tomonidan yuborilgan</th>
+                <th scope="col">Hokim yordamchisi tomonidan yuborilgan</th>
+                <th scope="col">Hokimiyatga yuborilgan</th>
+                <th scope="col"> Kadastr agentligiga yuborilgan</th>
+                <th scope="col"> Qurilish bo'limiga yuborilgan</th>
+                <th scope="col">Tasdiqlangan</th>
+                <th scope="col">Tasdiqlanmagan</th>
 
             </tr>
         </thead>
@@ -49,12 +49,12 @@
                     </a>
                 </td>
                 <td>
-                    <a href="{% url 'periodic-requests' %}?qurilishga=true&start_date={{ form.start_range.value }}&end_date={{ form.end_range.value }}&page=1">
+                    <a href="{% url 'periodic-requests' %}? Qurilish bo'limiga=true&start_date={{ form.start_range.value }}&end_date={{ form.end_range.value }}&page=1">
                         {{ stats.sent_to_kadastr }}
                     </a>
                 </td>
                 <td>
-                    <a href="{% url 'periodic-requests' %}?kadastrga=true&start_date={{ form.start_range.value }}&end_date={{ form.end_range.value }}&page=1">
+                    <a href="{% url 'periodic-requests' %}? Kadastr agentligiga=true&start_date={{ form.start_range.value }}&end_date={{ form.end_range.value }}&page=1">
                         {{ stats.sent_to_qurilish }}
                     </a>
                 </td>
