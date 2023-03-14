@@ -34,6 +34,16 @@ environ.Env.read_env(os.path.join(BASE_DIR, '.env'))
 DEBUG = env("DEBUG")
 SECRET_KEY = env("SECRET_KEY")
 DOMAIN_NAME=env("DOMAIN_NAME")
+
+
+ALLOWED_HOSTS = []
+try:
+    allowed_hosts_str = env('ALLOWED_HOSTS')
+    for split_string in allowed_hosts_str.split("|"):
+        ALLOWED_HOSTS.append(split_string)
+except:
+    pass 
+print(ALLOWED_HOSTS, ' allowed')
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.1/howto/deployment/checklist/
 
@@ -41,7 +51,6 @@ DOMAIN_NAME=env("DOMAIN_NAME")
 
 # SECURITY WARNING: don't run with debug turned on in production!
 
-ALLOWED_HOSTS = []
 
 
 # Application definition
