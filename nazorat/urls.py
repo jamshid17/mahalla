@@ -12,8 +12,10 @@ from .views import (
     period_stats,
     period_requests
 )
+from django.contrib import admin
 
 urlpatterns = [
+    path("admin/", admin.site.urls),
     path("", main, name='main'),
     path('users/', include('users.urls')), 
     path("allrequests/", all_requests, name='all-requests'),

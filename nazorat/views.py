@@ -3,6 +3,7 @@ from django_hosts.resolvers import reverse
 from django.contrib.auth.decorators import login_required
 from django.core.paginator import Paginator
 from pandas import date_range 
+from django.contrib import messages
 
 from .decorators import nazoratchi_only
 from main.models import RequestModel, Mahalla, Tuman
@@ -303,7 +304,11 @@ def period_stats(request):
                 nazoratchi_tumani = request.user.tuman
                 request_objs = request_objs.filter(sender__mahalla__tuman=nazoratchi_tumani)
             stats = monthly_stats_calculator(request_objs, start_range, end_range)
-
+        else:
+            messages.warning(request, "Kunlarni tekshiring!")
+            form = RangeForm()
+            stats = None
+             
     context['form'] = form
     context['stats'] = stats
 
