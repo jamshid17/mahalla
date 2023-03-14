@@ -332,10 +332,12 @@ def period_requests(request):
     query_page_num = request.GET.get('page', 1)
     
     #filtering request objects
+    request_objs = RequestModel.objects.filter(
+        created_at__range=[query_start_date, query_end_date], 
+    )
     request_user = request.user 
     if request_user.role == User.UserChoice.NAZORATCHI:
-        request_objs = RequestModel.objects.filter(
-            created_at__range=[query_start_date, query_end_date], 
+        request_objs = request_objs.filter(
             sender__mahalla__tuman=request_user.tuman,
         )
     if query_rais:

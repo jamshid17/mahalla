@@ -33,6 +33,7 @@ environ.Env.read_env(os.path.join(BASE_DIR, '.env'))
 
 DEBUG = env("DEBUG")
 SECRET_KEY = env("SECRET_KEY")
+DOMAIN_NAME=env("DOMAIN_NAME")
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.1/howto/deployment/checklist/
 
