@@ -1,7 +1,7 @@
 # Created by https://www.toptal.com/developers/gitignore/api/django,python
 # Edit at https://www.toptal.com/developers/gitignore?templates=django,python
-nazorat_data.csv
-tuman_data.csv
+umumiy_data.csv
+mahalla_data.csv
 migrations/
 .DS_Store
 cyrilic-latin.ipynb
