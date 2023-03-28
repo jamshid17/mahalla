@@ -5,6 +5,7 @@ from django.core.exceptions import ValidationError
 from notifications.models import notify_handler
 from notifications.signals import notify
 from notifications.models import Notification
+from location_field.models.plain import PlainLocationField
 
 
 User = get_user_model()
@@ -37,6 +38,7 @@ class RequestModel(models.Model):
     context = models.TextField(verbose_name="Text contexti")
     address = models.TextField()
     image = models.ImageField(upload_to='requests/', null=True, blank=True)
+    location = PlainLocationField(based_fields=['city'], zoom=7)
     created_at = models.DateTimeField(auto_now_add=True)
     hokimiyat_receiver = models.ForeignKey(
         User,

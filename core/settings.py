@@ -34,7 +34,7 @@ environ.Env.read_env(os.path.join(BASE_DIR, '.env'))
 DEBUG = env("DEBUG")
 SECRET_KEY = env("SECRET_KEY")
 DOMAIN_NAME=env("DOMAIN_NAME")
-
+GOOGLE_MAP_API_KEY = env("GOOGLE_MAPS_API_KEY")
 
 ALLOWED_HOSTS = []
 try:
@@ -64,6 +64,7 @@ INSTALLED_APPS = [
     'django_hosts',
     'crispy_forms',
     'notifications',
+    'location_field.apps.DefaultConfig',
     #created apps
     'hukumat', 
     'main',
@@ -136,6 +137,13 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+LOCATION_FIELD = {
+    'provider.google.api': '//maps.google.com/maps/api/js?sensor=false',
+    'provider.google.api_key': GOOGLE_MAP_API_KEY,
+    'provider.google.api_libraries': '',
+    'provider.google.map.type': 'ROADMAP',
+    'map.zoom': 9,
+}
 
 # Internationalization
 # https://docs.djangoproject.com/en/4.1/topics/i18n/

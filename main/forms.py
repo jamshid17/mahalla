@@ -1,8 +1,10 @@
+from attr import attr, attrs
 from django.core.exceptions import ValidationError
 from django import forms
 from django.contrib.auth import get_user_model
+from pandas import wide_to_long
 from .models import RequestModel
-
+from location_field.forms.plain import PlainLocationField, LocationWidget
 
 User = get_user_model()
 
@@ -32,9 +34,19 @@ class RequestForm(forms.Form):
         ),
         label='Rasm'
     )
+    location = PlainLocationField( 
+        based_fields=['city'], 
+        zoom=10,
+        initial='38.8612, 65.7847',
+    )
     send_hokimiyat = forms.BooleanField(
         label="Hokimiyatga yuborish",
-        required=False
+        required=False,
+        widget=forms.CheckboxInput(
+            attrs={
+                "style":"margin-top: 20px;"
+            }
+        )
     )
     send_qurilish = forms.BooleanField(
         label="Qurilish bo'limiga yuborish",
