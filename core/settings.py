@@ -86,7 +86,6 @@ MIDDLEWARE = [
     'whitenoise.middleware.WhiteNoiseMiddleware',
 ]
 
-SECURE_SSL_REDIRECT = True
 ROOT_URLCONF = 'core.urls'
 ROOT_HOSTCONF = 'core.hosts'
 DEFAULT_HOST = 'www'
