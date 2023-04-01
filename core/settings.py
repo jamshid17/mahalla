@@ -86,6 +86,7 @@ MIDDLEWARE = [
     'whitenoise.middleware.WhiteNoiseMiddleware',
 ]
 
+SECURE_SSL_REDIRECT = True
 ROOT_URLCONF = 'core.urls'
 ROOT_HOSTCONF = 'core.hosts'
 DEFAULT_HOST = 'www'
@@ -163,7 +164,7 @@ AUTH_USER_MODEL = 'users.User'
 
 STATIC_URL = 'static/'
 STATIC_ROOT = "/var/www/surovnomamahalla.uz/static/"
-STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
+STATICFILES_DIRS = [os.path.join(BASE_DIR, 'main', 'static')]
 
 MEDIA_URL = "media/"
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
