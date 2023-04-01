@@ -2,7 +2,7 @@
 # Edit at https://www.toptal.com/developers/gitignore?templates=django,python
 umumiy_data.csv
 mahalla_data.csv
-# migrations/
+migrations/
 .DS_Store
 cyrilic-latin.ipynb
 ### Django ###
@@ -11,7 +11,7 @@ cyrilic-latin.ipynb
 *.pyc
 __pycache__/
 local_settings.py
-# db.sqlite3
+db.sqlite3
 db.sqlite3-journal
 media
 static
