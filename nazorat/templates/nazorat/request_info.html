@@ -6,7 +6,12 @@
         <h5 class="card-title">So'rovnoma yuborgan shaxs</h5>
         <p class="card-text">Kasbi: {{ object.sender.role }}</p>
         <p class="card-text">Manzil: {{ object.sender.mahalla.name }}, {{ object.sender.mahalla.tuman.name  }} </p>
-        <h5 class="card-title">So'rovnoma mazmuni</h5>
+        <iframe width="600" height="450" style="border:0" loading="lazy" allowfullscreen
+            src="https://www.google.com/maps/embed/v1/place?zoom=15&q={{object.location_latitude}},{{object.location_longitude}}&key={{map_key}}">
+        </iframe>
+        <h5 class="card-title">Taxminiy qonun buzarlik holati</h5>
+        <p class="card-text">{{ object.taxminiy_qonun_buzarlik_holati }}</p>
+        <h5 class="card-title">So'rovnoma izohi</h5>
         <p class="card-text">{{ object.context }}</p>
         <h5 class="card-title">Manzil</h5>
         <p class="card-text">{{ object.address }}</p>
@@ -43,7 +48,7 @@
                 {{ response_from_kadastr.created_at|date:"d.m.Y" }}
             </span> {% else %} Yo'q {% endif %}
         </p>
-        <p>Tasdiqlanganmi: {% if is_certified %} Ha {% else %} Yo'q {% endif %}</p>
+        <p>Qonuniymi: {% if is_certified %} Ha {% else %} Yo'q {% endif %}</p>
     </div>
 </div>
 {% endblock content %}

@@ -9,6 +9,7 @@ from .forms import ResponseForm
 from django.db.models import Q
 from django.core.paginator import Paginator 
 from notifications.signals import notify
+from core.settings import GOOGLE_MAP_API_KEY
 
 
 paginator_number = 10
@@ -135,6 +136,8 @@ def request_info_view(request, pk):
                 user_response = res_obj
         else:
             form = None
+
+    context['map_key'] = GOOGLE_MAP_API_KEY
     context['user_response'] = user_response
     context['form'] = form
 

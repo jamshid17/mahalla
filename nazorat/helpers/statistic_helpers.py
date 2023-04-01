@@ -14,6 +14,9 @@ def main_stats_calculator(request_objects):
     all_request_count = request_objects.count()
     not_finished_request_count = request_objects.filter(responses__isnull=True).count()
     finished_request_count = all_request_count - not_finished_request_count
+    legal_request_count = request_objects.filter(responses__is_certified=True).distinct().count()
+    illegal_request_count = request_objects.filter(responses__is_certified=False).distinct().count()
+
     
     if all_request_count == 0:
         finished_percentage = "-"
@@ -23,6 +26,8 @@ def main_stats_calculator(request_objects):
     late_responses_count = request_objects.filter(responses__is_late=True).distinct().count() 
     main_stats['all_request_count'] = all_request_count
     main_stats['finished_request_count'] = finished_request_count
+    main_stats['legal_request_count'] = legal_request_count
+    main_stats['illegal_request_count'] = illegal_request_count
     main_stats['not_finished_request_count'] = not_finished_request_count
     main_stats['finished_percentage'] = finished_percentage
     main_stats['late_responses_count'] = late_responses_count

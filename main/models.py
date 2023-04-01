@@ -10,7 +10,18 @@ from location_field.models.plain import PlainLocationField
 
 User = get_user_model()
 
-# Create your models here.
+class QonunBuzilishOptions(models.TextChoices):
+    BOSHIMCHALIK = "Yerni o'zboshimchalik bilan egallab, noqonuniy qurilish ishlarini amalga oshirmoqda", \
+        "Yerni o'zboshimchalik bilan egallab, noqonuniy qurilish ishlarini amalga oshirmoqda."
+    ORTIQCHA = "Huquqiy hujjatda belgilangandan ortiq maydonda qurilish ishlarini amalga oshirmoqda", \
+        "Huquqiy hujjatda belgilangandan ortiq maydonda qurilish ishlarini amalga oshirmoqda." 
+    NORMAGA_ZID = "Qurilish ishlari shaharsozlik norma va qurilish me’yoriy hujjatlariga zid ravishda amalga oshirilmoqda", \
+        "Qurilish ishlari shaharsozlik norma va qurilish me’yoriy hujjatlariga zid ravishda amalga oshirilmoqda"
+    QALBAKI_HUJJAT = "Qalbaki hujjatlar asosida noqonuniy qurilish ishlar amalga oshirilmoqda", \
+        "Qalbaki hujjatlar asosida noqonuniy qurilish ishlar amalga oshirilmoqda"
+    BOSHQA = "Boshqa qonun buzilish holati", "Boshqa qonun buzilish holati"
+
+
 class Tuman(models.Model):
     name = models.CharField(max_length=1000)
     
@@ -20,6 +31,7 @@ class Tuman(models.Model):
 
     def __str__(self):
         return f"Tuman object, {self.name}, id ({self.pk})"
+
 
 class Mahalla(models.Model):
     name = models.CharField(max_length=1000)
@@ -35,10 +47,17 @@ class Mahalla(models.Model):
 
 class RequestModel(models.Model):
     sender = models.ForeignKey(User, on_delete=models.CASCADE, related_name='requests_as_sender')
+    taxminiy_qonun_buzarlik_holati = models.CharField(
+        max_length=200,
+        choices=QonunBuzilishOptions.choices, 
+        default=QonunBuzilishOptions.BOSHQA
+    )
     context = models.TextField(verbose_name="Text contexti")
     address = models.TextField()
     image = models.ImageField(upload_to='requests/', null=True, blank=True)
-    location = PlainLocationField(based_fields=['city'], zoom=7)
+    location_latitude = models.CharField(max_length=200, null=True, blank=True)
+    location_longitude = models.CharField(max_length=200, null=True, blank=True)
+
     created_at = models.DateTimeField(auto_now_add=True)
     hokimiyat_receiver = models.ForeignKey(
         User,
@@ -95,3 +114,4 @@ def custom_notify_handler(*args, **kwargs):
 
 notify.disconnect(notify_handler, dispatch_uid='notifications.models.notification')
 notify.connect(custom_notify_handler)  # , dispatch_uid='notifications.models.notification')
+

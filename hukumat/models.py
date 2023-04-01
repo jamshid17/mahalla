@@ -19,8 +19,7 @@ class Response(models.Model):
     )
     is_certified = models.BooleanField(
         default=False, 
-        verbose_name="Tasdiqlangan",
-        help_text=mark_safe("Bu javob tasdiqlanganmi?*")
+        verbose_name="Qonuniymi",
     )
     created_at = models.DateTimeField(auto_created=True, auto_now_add=True)
     is_late = models.BooleanField(default=False)

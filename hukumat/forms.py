@@ -22,14 +22,14 @@ class ResponseForm(forms.ModelForm):
                 'class':'form-control'
                 }
             ),
-            # 'is_certified' : forms.CheckboxInput(
-            #     attrs={
-            #         'style': 'margin-bottom: 20px;'
-            #     }
-            # )
+            'is_certified' : forms.CheckboxInput(
+                attrs={
+                    'style': 'margin-bottom: 20px;'
+                }
+            )
         }
         labels = {
             "buyruq":"Ko'rib chiqish natijasini yuklash",
             "extra_file": "Qo'shimcha hujjatni yuklash",
-            "is_certified" : "Tasdiqlangan*"
+            "is_certified" : "Qonuniymi? (Agar belgilanmasa, noqonuniy hisoblanadi!)"
         }

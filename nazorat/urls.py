@@ -10,7 +10,8 @@ from .views import (
     days_left_requests,
     request_detail,
     period_stats,
-    period_requests
+    period_requests,
+    legal_requests,
 )
 from django.contrib import admin
 
@@ -20,6 +21,7 @@ urlpatterns = [
     path('users/', include('users.urls')), 
     path("allrequests/", all_requests, name='all-requests'),
     path("finished-requests/", finished_requests, name='finished-requests'),
+    path("legal-requests/", legal_requests, name='legal-requests'),
     path("not-finished-requests/", not_finished_requests, name='not-finished-requests'),
     path("late-answered-requests/", late_answered_requests, name='late-answered-requests'),
     path("days-left-requests/", days_left_requests, name='days-left-requests'),

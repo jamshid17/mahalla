@@ -1,22 +1,34 @@
-from attr import attr, attrs
 from django.core.exceptions import ValidationError
 from django import forms
 from django.contrib.auth import get_user_model
-from pandas import wide_to_long
 from .models import RequestModel
 from location_field.forms.plain import PlainLocationField, LocationWidget
-
+from .models import QonunBuzilishOptions
 User = get_user_model()
 
 class RequestForm(forms.Form):
+
+    taxminiy_qonun_buzilishi = forms.ChoiceField(
+        choices=QonunBuzilishOptions.choices, 
+        initial=QonunBuzilishOptions.BOSHQA,
+        widget=forms.Select(
+            attrs={
+                'class': 'form-control',
+                'style': 'margin-bottom: 20px;',
+            }
+        ),
+        label="Taxminiy qonun buzilishi",
+    )
+
     text_context = forms.CharField(
         widget=forms.Textarea(attrs={
-            'placeholder': "So'rovnoma mazmuni", 
+            'placeholder': "So'rovnoma izohi", 
             'style': 'height: 150px; margin-bottom: 20px;',
             'class':'form-control',
             }),
-        label="So'rovnoma mazmuni",
-        )
+        label="So'rovnoma izohi",
+    )
+
     address = forms.CharField(
         widget=forms.Textarea(attrs={
             'placeholder': 'Manzil', 
@@ -24,7 +36,8 @@ class RequestForm(forms.Form):
             'class':'form-control',
             }),
         label="Manzil",
-        )
+    )
+
     image = forms.ImageField(
         widget=forms.ClearableFileInput(
             attrs={
@@ -36,8 +49,8 @@ class RequestForm(forms.Form):
     )
     location = PlainLocationField( 
         based_fields=['city'], 
-        zoom=10,
-        initial='38.8612, 65.7847',
+        zoom=15,
+        initial="38.8612, 65.7847",
     )
     send_hokimiyat = forms.BooleanField(
         label="Hokimiyatga yuborish",

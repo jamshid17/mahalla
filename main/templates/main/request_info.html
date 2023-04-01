@@ -3,10 +3,15 @@
 <div class="card" style="width: 40rem;">
     <img src="{{ object.image.url }}" class="card-img-top" >
     <div class="card-body">
-        <h5 class="card-title">So'rovnoma mazmuni</h5>
+        <h5 class="card-title">Taxminiy qonun buzarlik holati</h5>
+        <p class="card-text">{{ object.taxminiy_qonun_buzarlik_holati }}</p>
+        <h5 class="card-title">So'rovnoma izohi</h5>
         <p class="card-text">{{ object.context }}</p>
         <h5 class="card-title">Manzil</h5>
         <p class="card-text">{{ object.address }}</p>
+        <iframe width="600" height="450" style="border:0" loading="lazy" allowfullscreen
+            src="https://www.google.com/maps/embed/v1/place?zoom=15&q={{object.location_latitude}},{{object.location_longitude}}&key={{map_key}}">
+        </iframe>
         <h5 class="card-title">Yuborildi</h5>
         {% if object.hokimiyat_receiver %}
             <p class="card-text">Hokimiyatga</p>
@@ -40,7 +45,7 @@
             {% endif %}
             {% else %} Yo'q {% endif %}
         </p>
-        <p>Tasdiqlanganmi: {% if is_certified %} Ha {% else %} Yo'q {% endif %}</p>
+        <p>Qonuniymi: {% if is_certified %} Ha {% else %} Yo'q {% endif %}</p>
     </div>
 </div>
 {% endblock content %}

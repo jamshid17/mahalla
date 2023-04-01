@@ -4,7 +4,7 @@ from django.contrib.auth.decorators import login_required
 from django.core.paginator import Paginator
 from pandas import date_range 
 from django.contrib import messages
-
+from core.settings import GOOGLE_MAP_API_KEY
 from .decorators import nazoratchi_only
 from main.models import RequestModel, Mahalla, Tuman
 from .forms import RangeForm
@@ -133,6 +133,48 @@ def finished_requests(request):
 
 @login_required(login_url='users/login')
 @nazoratchi_only
+def legal_requests(request):
+    query_tuman_id = request.GET.get('tuman_id', None)
+    query_mahalla_id = request.GET.get('mahalla_id', None)
+    query_legal_bool = request.GET.get('legal', False)
+    query_page_num = request.GET.get('page', 1)
+    context = {
+        'host_name':'nazorat'
+    }
+    tuman_object = None
+    if query_tuman_id and query_tuman_id.isdigit():
+        tuman_object = Tuman.objects.get(id=query_tuman_id)
+        context['place_name'] = tuman_object.name
+    mahalla_object = None
+    if query_mahalla_id and query_mahalla_id.isdigit():
+        mahalla_object = Mahalla.objects.get(id=query_mahalla_id)
+        context['place_name'] = mahalla_object.name 
+    if query_legal_bool == 'True':
+        query_legal_bool = True
+    else:
+        query_legal_bool = False
+        
+    user = request.user
+    request_objs = RequestModel.objects.filter(responses__is_certified=query_legal_bool).distinct()
+    
+    if user.role == "Nazoratchi":
+        nazoratchi_tumani = user.tuman
+        request_objs = request_objs.filter(sender__mahalla__tuman=nazoratchi_tumani)
+        if mahalla_object:
+            request_objs = request_objs.filter(sender__mahalla=mahalla_object)
+    elif tuman_object:
+        request_objs = request_objs.filter(sender__mahalla__tuman=tuman_object)
+
+    request_objs = request_objs.order_by('-created_at')
+    paginator = Paginator(request_objs, paginator_number)
+    request_objects = paginator.get_page(query_page_num)  
+    context['page_name'] = "Javob berilgan so'rovnomalar"
+    context['request_objects'] = request_objects
+    return render(request, template_name='nazorat/request_list.html', context=context)
+
+
+@login_required(login_url='users/login')
+@nazoratchi_only
 def late_answered_requests(request):
     query_tuman_id = request.GET.get('tuman_id', None)
     query_mahalla_id = request.GET.get('mahalla_id', None)
@@ -140,7 +182,6 @@ def late_answered_requests(request):
     context = {
         'host_name':'nazorat'
     }
-
     tuman_object = None
     if query_tuman_id and query_tuman_id.isdigit():
         tuman_object = Tuman.objects.get(id=query_tuman_id)
@@ -166,7 +207,6 @@ def late_answered_requests(request):
     context['page_name'] = "Muddati buzilib javob berilgan so'rovnomalar"
     context['request_objects'] = request_objects
     return render(request, template_name='nazorat/request_list.html', context=context)    
-
 
 
 @login_required(login_url='users/login')
@@ -270,6 +310,8 @@ def request_detail(request, pk):
         return redirect(reverse('main', host='nazorat'))
     response_from_hokim, response_from_kadastr, \
         response_from_qurilish, is_certified  = responses_checker(req_object=req_object)
+        
+    context['map_key'] = GOOGLE_MAP_API_KEY
     context['response_from_hokim'] = response_from_hokim
     context['response_from_kadastr'] = response_from_kadastr
     context['response_from_qurilish'] = response_from_qurilish

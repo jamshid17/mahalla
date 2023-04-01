@@ -10,6 +10,7 @@ from .helpers import responses_checker
 from django.contrib import messages
 from notifications.signals import notify
 from django.contrib.auth import get_user_model
+from core.settings import GOOGLE_MAP_API_KEY
 
 import pandas as pd 
 from .models import Tuman, Mahalla
@@ -108,6 +109,7 @@ def request_create(request):
             data = form.cleaned_data
             sender = request.user
             sender_tuman = sender.mahalla.tuman
+            location_lat, location_long = data['location'].split(",")
             sender_tuman_hokimiyat = None
             sender_tuman_qurilish = None
             sender_tuman_kadastr = None
@@ -135,12 +137,15 @@ def request_create(request):
                     )
                 except:
                     pass    
-
+            
             req_obj = RequestModel.objects.create(
                 sender=request.user,
+                taxminiy_qonun_buzarlik_holati=data['taxminiy_qonun_buzilishi'],
                 context=data['text_context'],
                 address=data['address'],
                 image=data['image'],
+                location_latitude=location_lat,
+                location_longitude=location_long,
                 hokimiyat_receiver=sender_tuman_hokimiyat,
                 kadastr_receiver=sender_tuman_kadastr,
                 qurilish_receiver=sender_tuman_qurilish,
@@ -200,12 +205,12 @@ def request_info_view(request, pk):
     
     response_from_hokim, response_from_kadastr, \
         response_from_qurilish, is_certified = responses_checker(req_object=req_object)
+    context['map_key'] = GOOGLE_MAP_API_KEY
     context['response_from_hokim'] = response_from_hokim
     context['response_from_kadastr'] = response_from_kadastr
     context['response_from_qurilish'] = response_from_qurilish
     context['is_certified'] = is_certified
     context['object'] = req_object
-
     return render(request=request, template_name='main/request_info.html', context=context)
 
 
