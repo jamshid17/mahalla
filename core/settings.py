@@ -146,6 +146,7 @@ LOCATION_FIELD = {
     'map.zoom': 9,
 }
 
+
 # Internationalization
 # https://docs.djangoproject.com/en/4.1/topics/i18n/
 
