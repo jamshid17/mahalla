@@ -42,7 +42,7 @@ try:
     for split_string in allowed_hosts_str.split("|"):
         ALLOWED_HOSTS.append(split_string)
 except:
-    pass 
+    ALLOWED_HOSTS = ['*'] 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.1/howto/deployment/checklist/
 

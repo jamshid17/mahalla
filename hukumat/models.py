@@ -2,7 +2,7 @@ from tabnanny import verbose
 from urllib import request, response
 from django.db import models
 from django.contrib.auth import get_user_model
-from datetime import datetime, timezone
+from datetime import datetime, timezone, timedelta
 from django.utils.safestring import mark_safe
 
 User = get_user_model()
@@ -37,10 +37,10 @@ class Response(models.Model):
             if self.created_at:
                 response_time = self.created_at
             else:
-                response_time = datetime.now()
+                response_time = datetime.now() - timedelta(hours=5)
                 response_time = response_time.replace(tzinfo=timezone.utc)
             difference = response_time - request_time
-            if difference.days >= 5:
+            if difference.days > 5:
                 self.is_late = True
             else:
                 self.is_late = False
